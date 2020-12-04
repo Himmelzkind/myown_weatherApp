@@ -1,4 +1,5 @@
 body {
+  background-color: rgb(150, 187, 218);
   font-family: "Open Sans condensed", "Calibri Light", Arial;
 }
 
@@ -67,7 +68,7 @@ li {
   padding: 10px 30px 10px 30px;
 }
 
-.footer {
+.wrapper {
   margin: 0 auto;
   max-width: 600px;
 }
