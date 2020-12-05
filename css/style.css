@@ -41,7 +41,7 @@ li {
 .main_top,
 .forcast_bottom {
   border: 1px solid rgba(0, 0, 0, 0);
-  max-width: 600px;
+  max-width: 500px;
 }
 .btn-primary.mb-2 {
   background-color: rgba(128, 128, 128, 0.349);
