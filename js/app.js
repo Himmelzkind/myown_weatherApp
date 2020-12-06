@@ -1,7 +1,15 @@
 function formatDate(timestemp){
-//calculate the date
+//calculate the weekday and local time
 let date = new Date();
-  let weekDays = [ "Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  let weekDays = [ 
+  "Sunday",
+  "Monday", 
+  "Tuesday", 
+  "Wednesday", 
+  "Thursday", 
+  "Friday", 
+  "Saturday"
+  ];
   let day = weekDays[date.getDay()];
   let hour = date.getHours();
   let minutes = date.getMinutes();
@@ -14,22 +22,15 @@ let date = new Date();
   return formattedDate;
 }
 
-let currentTime = new Date();
-let h2 = document.querySelector("h2");
-let formattedDate = formatDate(currentTime);
-h2.innerHTML = `${formattedDate}`;
-
 
 function displayTemperature(response){
-    //exctract temperature from api
-    console.log(response.data);
-    debugger
+    //exctract temperature, humidity and windspeed from openweathermap.org api
     let h1 = document.querySelector("h1").innerHTML= response.data.name;
     let temperatureElement = document.querySelector("#currentTemp");
-    let descriptionElement = document.querySelector("#w-description");
-    let humidityElement = document.querySelector("#humidity-wind");
+    let descriptionElement = document.querySelector("#w_description");
+    let humidityElement = document.querySelector("#humidity_wind");
     let h2 = document.querySelector("h2");
-    
+
     let temperatureMax = Math.round(response.data.main.temp_max);
     let temperatureMin = Math.round(response.data.main.temp_min);
     let humidity = response.data.main.humidity;
@@ -38,10 +39,24 @@ function displayTemperature(response){
     temperatureElement.innerHTML = `<strong>${temperatureMax}°C</strong>|${temperatureMin}°C`;
     descriptionElement.innerHTML = response.data.weather[0].description;
     humidityElement.innerHTML = `humidity: ${humidity} % | windspeed: ${windspeed} km/h`;
+    h2.innerHTML = formatDate(response.data.dt * 1000);
+    
+    //change icon
+    let iconElement = document.querySelector("#icon_main");
+    iconElement.setAttribute(
+    "src", 
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
+    iconElement.setAttribute(
+        "alt",
+        `${descriptionElement}`
+    );
 
 }
 
 let apiKey = "c0ceae1b9bc9cde459831675fe59f1d6";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Sydney&appid=${apiKey}&units=metric`
+let city = "Sydney";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
 
+//set up axios for api
 axios.get(apiUrl).then(displayTemperature);
