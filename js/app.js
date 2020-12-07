@@ -1,6 +1,6 @@
 function formatDate(timestemp){
-//calculate the weekday and local time
-let date = new Date();
+  //calculate the weekday and local time
+  let date = new Date();
   let weekDays = [ 
   "Sunday",
   "Monday", 
@@ -22,7 +22,6 @@ let date = new Date();
   return formattedDate;
 }
 
-
 function displayTemperature(response){
     //exctract temperature, humidity and windspeed from openweathermap.org api
     let h1 = document.querySelector("h1").innerHTML= response.data.name;
@@ -41,7 +40,7 @@ function displayTemperature(response){
     humidityElement.innerHTML = `humidity: ${humidity} % | windspeed: ${windspeed} km/h`;
     h2.innerHTML = formatDate(response.data.dt * 1000);
     
-    //change icon
+    //change main weather icon
     let iconElement = document.querySelector("#icon_main");
     iconElement.setAttribute(
     "src", 
@@ -54,9 +53,25 @@ function displayTemperature(response){
 
 }
 
-let apiKey = "c0ceae1b9bc9cde459831675fe59f1d6";
-let city = "Sydney";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+function search(city) {
+  // set up api requirements
+  let apiKey = "c0ceae1b9bc9cde459831675fe59f1d6";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  console.log(apiUrl);
+  //set up axios for api
+  axios.get(apiUrl).then(displayTemperature);
+}
 
-//set up axios for api
-axios.get(apiUrl).then(displayTemperature);
+function handleSubmit(event) {
+  // catch submit input = city name
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#inlineFormInput");
+  console.log(cityInputElement.value);
+  // and hand over to api request
+  search(cityInputElement.value);
+}
+
+
+//control search and submit form
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
