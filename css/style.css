@@ -8,6 +8,7 @@ h2,
 .weatherToday {
   color: #cefcec;
   text-align: center;
+  margin-bottom: 0;
 }
 
 h1 {
@@ -19,6 +20,10 @@ h1 {
 
 h2,
 ul > :first-child {
+  font-size: 20px;
+}
+
+h3 {
   font-size: 20px;
 }
 
@@ -65,7 +70,7 @@ li {
   box-shadow: 2px 3px 3px rgba(128, 128, 128, 0.301),
     -2px 0px 3px rgba(128, 128, 128, 0.301);
   margin: 0 auto 20px auto;
-  padding: 10px 30px 10px 30px;
+  padding: 10px 25px 20px 25px;
 }
 
 .wrapper {
