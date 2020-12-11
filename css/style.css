@@ -44,7 +44,7 @@ li {
 }
 
 .main_top,
-.forcast_bottom {
+.forecast_bottom {
   border: 1px solid rgba(0, 0, 0, 0);
   max-width: 500px;
 }
@@ -64,7 +64,7 @@ li {
   padding: 20px 30px 40px 30px;
 }
 
-.forcast_bottom {
+.forecast_bottom {
   background-color: rgba(184, 182, 182, 0.637);
   border-radius: 0px 0px 20px 20px;
   box-shadow: 2px 3px 3px rgba(128, 128, 128, 0.301),

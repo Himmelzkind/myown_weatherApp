@@ -1,6 +1,6 @@
 function formatDate(timestemp){
   //calculate the weekday and local time
-  let date = new Date();
+  let date = new Date(timestemp);
   let weekDays = [ 
   "Sunday",
   "Monday", 
@@ -53,20 +53,79 @@ function displayTemperature(response){
 
 }
 
+function formatDay(timestemp) {
+  let date = new Date(timestemp);
+  let weekDays = [ 
+  "sun",
+  "mon", 
+  "tue", 
+  "wed", 
+  "thu", 
+  "fri", 
+  "sat"
+  ];
+  let day = weekDays[date.getDay()];
+  return day
+}
+
+function displayForecast(response){
+  let forecastElement = document.querySelector(".forecast-bottom");
+
+  forecastElement.innerHTML = null;
+  let forecast = null;
+
+  for (let index = 0; index < 7; index++) {
+    forecast = response.data.daily[index];
+
+    forecastElement.innerHTML += `
+      <div class="row">
+        <div class="col-2">
+          <h3>${formatDay(forecast.dt + 1000)}</h3>
+          <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="${forecast.weather[0].description}">
+          <div class="weather-forecast-temp">
+            <strong>${Math.round(forecast.temp.max)}°</strong>${Math.round(forecast.temp.min)}°
+          </div>
+        </div>
+      </div>  
+    
+    `;
+  }
+
+}
+
+function getCoordinates(response){
+  // get coordinates from submitted city name
+  console.log(response.data.coord.lat);
+  let longitude = response.data.coord.lon;
+  let latitude = response.data.coord.lat;
+
+  //search for forcast temperature
+  let apiKey = "c0ceae1b9bc9cde459831675fe59f1d6";
+  apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely&appid=${apiKey}&units=metric`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(displayForecast);
+}
+
 function search(city) {
   // set up api requirements
   let apiKey = "c0ceae1b9bc9cde459831675fe59f1d6";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-  console.log(apiUrl);
-  //set up axios for api
+
+  //set up axios for api and get temperature
   axios.get(apiUrl).then(displayTemperature);
+
+  //get coordinates
+  axios.get(apiUrl).then(getCoordinates);
+
+  
+
 }
 
 function handleSubmit(event) {
   // catch submit input = city name
   event.preventDefault();
   let cityInputElement = document.querySelector("#inlineFormInput");
-  console.log(cityInputElement.value);
+
   // and hand over to api request
   search(cityInputElement.value);
 }
