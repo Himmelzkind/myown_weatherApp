@@ -65,6 +65,11 @@ li {
   padding: 20px 30px 40px 30px;
 }
 
+#icon-main {
+  display: block;
+  margin: 0 auto;
+}
+
 .forecast-icon {
   width: 100%;
 }
@@ -74,7 +79,7 @@ li {
   border-radius: 0px 0px 20px 20px;
   box-shadow: 2px 3px 3px rgba(128, 128, 128, 0.301),
     -2px 0px 3px rgba(128, 128, 128, 0.301);
-  margin: 0 auto 20px auto;
+  margin: 0 auto 10px auto;
   padding: 10px 25px 20px 25px;
 }
 
@@ -83,10 +88,33 @@ li {
   max-width: 600px;
 }
 
-#currentTemp {
+#currentTemp,
+.units {
   font-size: 34px;
 }
 
 #humidity-wind {
   font-size: 12px;
+}
+
+#fahrenheit-link,
+#pipe {
+  font-size: 17px;
+}
+
+#pipe {
+  display: inline;
+}
+
+#celsius-link {
+  font-weight: 900;
+}
+#fahrenheit-link {
+  margin-left: -3px;
+  padding: -6px;
+  color: pink;
+  text-decoration: none;
+}
+.weatherToday .active {
+  color: #4ecca3;
 }

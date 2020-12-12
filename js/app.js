@@ -35,8 +35,11 @@ function displayTemperature(response){
     let humidity = response.data.main.humidity;
     let windspeed = Math.round(response.data.wind.speed);
 
-    temperatureElement.innerHTML = `<strong>${temperatureMax}°C</strong>|${temperatureMin}°C`;
-    descriptionElement.innerHTML = response.data.weather[0].description;
+    celsiusTemperatureMax = response.data.main.temp_max;
+    celsiusTemperatureMin = response.data.main.temp_min;
+
+    temperatureElement.innerHTML = `<strong>${temperatureMax}°</strong>|${temperatureMin}`;
+    //descriptionElement.innerHTML = response.data.weather[0].description;
     humidityElement.innerHTML = `humidity: ${humidity} % | windspeed: ${windspeed} km/h`;
     h2.innerHTML = formatDate(response.data.dt * 1000);
     
@@ -65,21 +68,17 @@ function formatDay(timestamp) {
   "sat"
   ];
   let day = weekDays[date.getDay()];
-  console.log(date);
-  console.log(day);
   return day
 }
 
 function displayForecast(response){
   let forecastElement = document.querySelector(".forecast_bottom");
-  console.log(`response forecast ${response}`);
 
   forecastElement.innerHTML = null;
   let forecast = null;
 
   for (let index = 0; index < 6; index++) {
     forecast = response.data.daily[index];
-    console.log(`forecast ${response.data.daily}`);
 
     forecastElement.innerHTML += `
   
@@ -98,14 +97,12 @@ function displayForecast(response){
 
 function getCoordinates(response){
   // get coordinates from submitted city name
-  console.log(response.data.coord.lat);
   let longitude = response.data.coord.lon;
   let latitude = response.data.coord.lat;
 
   //search for forcast temperature
   let apiKey = "c0ceae1b9bc9cde459831675fe59f1d6";
   apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely&appid=${apiKey}&units=metric`;
-  console.log(apiUrl);
   axios.get(apiUrl).then(displayForecast);
 }
 
@@ -131,7 +128,57 @@ function handleSubmit(event) {
   search(cityInputElement.value);
 }
 
+function currentPosition(position){
+  // get current location (coordinates) of your device and pass them on to display temperature of your location
+  let latitude = position.coords.latitude;
+  let longitude = position.coords.longitude;
+  let apiKey = "361119f7d767ce895ccf917d2e91cc83";
+  let weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+  axios.get(weatherUrl).then(displayTemperature);
+}
+
+function displayFahrenheit(event){
+  event.preventDefault();
+  //remove the active class of the celsius link and add the active class to the fahrenheit link
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+
+  // calculate fahrenheit temperature
+  let fahrenheitTemperatureMax = (celsiusTemperatureMax * 9) / 5 + 32;
+  let fahrenheitTemperatureMin = (celsiusTemperatureMin * 9) / 5 + 32;
+  let temperatureElement = document.querySelector("#currentTemp");
+  temperatureElement.innerHTML = `<strong>${Math.round(fahrenheitTemperatureMax)}°</strong>|${Math.round(fahrenheitTemperatureMin)}°`;
+}
+
+function displayCelsiusTemperature(event) {
+  event.preventDefault();
+  // remove the active class of the fahrenheit link and add the active class to the celsius link
+  fahrenheitLink.classList.remove("active");
+  celsiusLink.classList.remove("active");
+  
+  let temperatureElement = document.querySelector("#currentTemp");
+  temperatureElement.innerHTML = `<strong>${Math.round(celsiusTemperatureMax)}°</strong>|${Math.round(celsiusTemperatureMin)}°`;
+}
+
+let celsiusTemperatureMax = null;
+let celsiusTemperatureMin = null;
+
 
 //control search and submit form
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
+
+// get weather for current location
+let currentButton = document.querySelector(".current-button");
+currentButton.addEventListener("click", navigator.geolocation.getCurrentPosition(currentPosition));
+
+// call unit converter
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click",displayFahrenheit);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click",displayCelsiusTemperature);
+
+//
+// application starts with temperature for location...
+search("Sydney");
