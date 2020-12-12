@@ -1,6 +1,6 @@
-function formatDate(timestemp){
+function formatDate(timestamp){
   //calculate the weekday and local time
-  let date = new Date(timestemp);
+  let date = new Date(timestamp);
   let weekDays = [ 
   "Sunday",
   "Monday", 
@@ -53,8 +53,8 @@ function displayTemperature(response){
 
 }
 
-function formatDay(timestemp) {
-  let date = new Date(timestemp);
+function formatDay(timestamp) {
+  let date = new Date(timestamp);
   let weekDays = [ 
   "sun",
   "mon", 
@@ -65,29 +65,32 @@ function formatDay(timestemp) {
   "sat"
   ];
   let day = weekDays[date.getDay()];
+  console.log(date);
+  console.log(day);
   return day
 }
 
 function displayForecast(response){
-  let forecastElement = document.querySelector(".forecast-bottom");
+  let forecastElement = document.querySelector(".forecast_bottom");
+  console.log(`response forecast ${response}`);
 
   forecastElement.innerHTML = null;
   let forecast = null;
 
-  for (let index = 0; index < 7; index++) {
+  for (let index = 0; index < 5; index++) {
     forecast = response.data.daily[index];
+    console.log(`forecast ${response.data.daily}`);
 
     forecastElement.innerHTML += `
-      <div class="row">
+  
         <div class="col-2">
-          <h3>${formatDay(forecast.dt + 1000)}</h3>
+          <h3>${formatDay(forecast.dt * 1000)}</h3>
           <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="${forecast.weather[0].description}">
           <div class="weather-forecast-temp">
-            <strong>${Math.round(forecast.temp.max)}°</strong>${Math.round(forecast.temp.min)}°
+            <strong>${Math.round(forecast.temp.max)}°</strong> | ${Math.round(forecast.temp.min)}°
           </div>
         </div>
-      </div>  
-    
+      
     `;
   }
 
@@ -115,9 +118,7 @@ function search(city) {
   axios.get(apiUrl).then(displayTemperature);
 
   //get coordinates
-  axios.get(apiUrl).then(getCoordinates);
-
-  
+  axios.get(apiUrl).then(getCoordinates); 
 
 }
 
