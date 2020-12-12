@@ -77,7 +77,7 @@ function displayForecast(response){
   forecastElement.innerHTML = null;
   let forecast = null;
 
-  for (let index = 0; index < 5; index++) {
+  for (let index = 0; index < 6; index++) {
     forecast = response.data.daily[index];
     console.log(`forecast ${response.data.daily}`);
 
@@ -85,9 +85,9 @@ function displayForecast(response){
   
         <div class="col-2">
           <h3>${formatDay(forecast.dt * 1000)}</h3>
-          <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="${forecast.weather[0].description}">
+          <img class="forecast-icon" src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="${forecast.weather[0].description}">
           <div class="weather-forecast-temp">
-            <strong>${Math.round(forecast.temp.max)}°</strong> | ${Math.round(forecast.temp.min)}°
+            <strong>${Math.round(forecast.temp.max)}°</strong>|${Math.round(forecast.temp.min)}°
           </div>
         </div>
       

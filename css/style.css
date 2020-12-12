@@ -25,6 +25,7 @@ ul > :first-child {
 
 h3 {
   font-size: 20px;
+  text-align: center;
 }
 
 ul {
@@ -62,6 +63,10 @@ li {
   box-shadow: 2px 0px 3px rgba(128, 128, 128, 0.301),
     -2px 0px 3px rgba(128, 128, 128, 0.301);
   padding: 20px 30px 40px 30px;
+}
+
+.forecast-icon {
+  width: 100%;
 }
 
 .forecast_bottom {
