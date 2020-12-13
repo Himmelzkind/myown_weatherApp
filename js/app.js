@@ -152,30 +152,28 @@ function displayFahrenheit(event){
   let fahrenheitTemperatureMax = (celsiusTemperatureMax * 9) / 5 + 32;
   let fahrenheitTemperatureMin = (celsiusTemperatureMin * 9) / 5 + 32;
   let temperatureElement = document.querySelector("#currentTemp");
-  temperatureElement.innerHTML = `<strong>${Math.round(fahrenheitTemperatureMax)}°</strong>|${Math.round(fahrenheitTemperatureMin)}°`;
+  temperatureElement.innerHTML = `<strong>${Math.round(fahrenheitTemperatureMax)}°</strong>|${Math.round(fahrenheitTemperatureMin)}`;
 }
 
 function displayCelsiusTemperature(event) {
   event.preventDefault();
   // remove the active class of the fahrenheit link and add the active class to the celsius link
   fahrenheitLink.classList.remove("active");
-  celsiusLink.classList.remove("active");
+  celsiusLink.classList.add("active");
   
   let temperatureElement = document.querySelector("#currentTemp");
-  temperatureElement.innerHTML = `<strong>${Math.round(celsiusTemperatureMax)}°</strong>|${Math.round(celsiusTemperatureMin)}°`;
+  temperatureElement.innerHTML = `<strong>${Math.round(celsiusTemperatureMax)}°</strong>|${Math.round(celsiusTemperatureMin)}`;
 }
-
-
 
 let celsiusTemperatureMax = null;
 let celsiusTemperatureMin = null;
 
 //
 // application starts with temperature for location...
-search("Sydney");
+search("Tokyo");
 
 //control search and submit form
-let form = document.querySelector("#submit-button");
+let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
 // get weather for current location

@@ -1,21 +1,55 @@
 body {
-  background-color: rgb(150, 187, 218);
-  font-family: "Open Sans condensed", "Calibri Light", Arial;
+  background-color: #1b1f22;
+  font-family: "Playfair Display", "Open Sans condensed", "Calibri Light", Arial;
+  color: white;
+}
+
+.main_top {
+  margin: 30px auto 0 auto;
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.5385504543614321) 0%,
+      rgba(150, 150, 150, 0.26684177088804273) 39%,
+      rgba(224, 224, 224, 0.06235997817095584) 100%
+    ),
+    url("https://cdn.pixabay.com/photo/2016/03/09/15/18/stars-1246590__340.jpg");
+  border-radius: 20px 20px 0px 0px;
+  box-shadow: 2px 0px 3px rgba(128, 128, 128, 0.301),
+    -2px 0px 3px rgba(128, 128, 128, 0.301);
+  padding: 20px 30px 20px 30px;
+}
+
+.btn-primary.mb-2:hover {
+  background-color: white;
+  transition: 0.22s ease;
+}
+
+.btn-primary.mb-2 {
+  background-color: rgba(128, 128, 128, 0.349);
+  border: 0.5px solid white;
+  border-radius: 50%;
+  padding: 0.2rem 0.45rem;
+}
+
+i:hover {
+  color: black;
 }
 
 h1,
 h2,
 .weatherToday {
-  color: #cefcec;
+  color: white;
   text-align: center;
   margin-bottom: 0;
 }
 
 h1 {
-  font-size: 25px;
+  font-size: 30px;
+  font-weight: 600;
   margin-top: 25px;
-  margin-bottom: 0;
+  margin-bottom: 5px;
   line-height: 24px;
+  letter-spacing: 2px;
 }
 
 h2,
@@ -40,29 +74,10 @@ li {
   font-size: 16px;
 }
 
-.weatherToday {
-  box-shadow: 0 0 10px -10px #4ecca3;
-}
-
 .main_top,
 .forecast_bottom {
   border: 1px solid rgba(0, 0, 0, 0);
   max-width: 500px;
-}
-.btn-primary.mb-2 {
-  background-color: rgba(128, 128, 128, 0.349);
-  border: 1px solid rgba(0, 0, 0, 0.103);
-  border-radius: 50%;
-  padding: 0.375rem 0.5rem;
-}
-.main_top {
-  margin: 30px auto 0 auto;
-  background-color: rgba(41, 40, 40, 0);
-  background-image: url("https://www.br.de/sternenhimmel/sterne-sternbilder-sternenhimmel-sternzeichen-102~_v-img__16__9__xl_-d31c35f8186ebeb80b0cd843a7c267a0e0c81647.jpg?version=b14b1");
-  border-radius: 20px 20px 0px 0px;
-  box-shadow: 2px 0px 3px rgba(128, 128, 128, 0.301),
-    -2px 0px 3px rgba(128, 128, 128, 0.301);
-  padding: 20px 30px 20px 30px;
 }
 
 #icon-main {
@@ -75,7 +90,7 @@ li {
 }
 
 .forecast_bottom {
-  background-color: rgba(184, 182, 182, 0.637);
+  background-color: #2a2f33;
   border-radius: 0px 0px 20px 20px;
   box-shadow: 2px 3px 3px rgba(128, 128, 128, 0.301),
     -2px 0px 3px rgba(128, 128, 128, 0.301);
@@ -97,26 +112,20 @@ li {
   font-size: 12px;
 }
 
-#fahrenheit-link,
-#pipe {
-  font-size: 17px;
-}
-
-#pipe {
-  display: inline;
-}
-
 #celsius-link {
   font-weight: 900;
+  text-decoration: none;
+  color: white;
 }
 #fahrenheit-link {
+  font-size: 17px;
   margin-left: -3px;
   padding: -6px;
   color: pink;
   text-decoration: none;
 }
 .weatherToday .active {
-  color: #4ecca3;
+  color: white;
   cursor: default;
 }
 .weatherToday .active:hover {
