@@ -26,7 +26,6 @@ function displayTemperature(response){
     //exctract temperature, humidity and windspeed from openweathermap.org api
     let h1 = document.querySelector("h1").innerHTML= response.data.name;
     let temperatureElement = document.querySelector("#currentTemp");
-    let descriptionElement = document.querySelector("#w_description");
     let humidityElement = document.querySelector("#humidity_wind");
     let h2 = document.querySelector("h2");
 
@@ -34,17 +33,18 @@ function displayTemperature(response){
     let temperatureMin = Math.round(response.data.main.temp_min);
     let humidity = response.data.main.humidity;
     let windspeed = Math.round(response.data.wind.speed);
+    let descriptionElement = response.data.weather[0].description;
 
     celsiusTemperatureMax = response.data.main.temp_max;
     celsiusTemperatureMin = response.data.main.temp_min;
 
     temperatureElement.innerHTML = `<strong>${temperatureMax}°</strong>|${temperatureMin}`;
-    //descriptionElement.innerHTML = response.data.weather[0].description;
     humidityElement.innerHTML = `humidity: ${humidity} % | windspeed: ${windspeed} km/h`;
     h2.innerHTML = formatDate(response.data.dt * 1000);
     
     //change main weather icon
-    let iconElement = document.querySelector("#icon_main");
+    let iconElement = document.querySelector("#icon-main");
+    
     iconElement.setAttribute(
     "src", 
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
@@ -110,13 +110,12 @@ function search(city) {
   // set up api requirements
   let apiKey = "c0ceae1b9bc9cde459831675fe59f1d6";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
+  
   //set up axios for api and get temperature
   axios.get(apiUrl).then(displayTemperature);
 
   //get coordinates
   axios.get(apiUrl).then(getCoordinates); 
-
 }
 
 function handleSubmit(event) {
@@ -128,13 +127,19 @@ function handleSubmit(event) {
   search(cityInputElement.value);
 }
 
-function currentPosition(position){
+function searchLocation(position){
   // get current location (coordinates) of your device and pass them on to display temperature of your location
+  //position.preventDefault();
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
   let apiKey = "361119f7d767ce895ccf917d2e91cc83";
   let weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
   axios.get(weatherUrl).then(displayTemperature);
+}
+
+function getCurrentLocation(event){
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(searchLocation);
 }
 
 function displayFahrenheit(event){
@@ -160,17 +165,22 @@ function displayCelsiusTemperature(event) {
   temperatureElement.innerHTML = `<strong>${Math.round(celsiusTemperatureMax)}°</strong>|${Math.round(celsiusTemperatureMin)}°`;
 }
 
+
+
 let celsiusTemperatureMax = null;
 let celsiusTemperatureMin = null;
 
+//
+// application starts with temperature for location...
+search("Sydney");
 
 //control search and submit form
-let form = document.querySelector("#search-form");
+let form = document.querySelector("#submit-button");
 form.addEventListener("submit", handleSubmit);
 
 // get weather for current location
-let currentButton = document.querySelector(".current-button");
-currentButton.addEventListener("click", navigator.geolocation.getCurrentPosition(currentPosition));
+let currentButton = document.querySelector("#location-button");
+currentButton.addEventListener("click", getCurrentLocation);
 
 // call unit converter
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
@@ -179,6 +189,4 @@ fahrenheitLink.addEventListener("click",displayFahrenheit);
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click",displayCelsiusTemperature);
 
-//
-// application starts with temperature for location...
-search("Sydney");
+

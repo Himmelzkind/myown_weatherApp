@@ -62,7 +62,7 @@ li {
   border-radius: 20px 20px 0px 0px;
   box-shadow: 2px 0px 3px rgba(128, 128, 128, 0.301),
     -2px 0px 3px rgba(128, 128, 128, 0.301);
-  padding: 20px 30px 40px 30px;
+  padding: 20px 30px 20px 30px;
 }
 
 #icon-main {
@@ -85,7 +85,7 @@ li {
 
 .wrapper {
   margin: 0 auto;
-  max-width: 600px;
+  max-width: 500px;
 }
 
 #currentTemp,
@@ -117,4 +117,9 @@ li {
 }
 .weatherToday .active {
   color: #4ecca3;
+  cursor: default;
+}
+.weatherToday .active:hover {
+  color: pink;
+  cursor: pointer;
 }
