@@ -1,5 +1,5 @@
 body {
-  background-color: #1b1f22;
+  background-color: #27292b;
   font-family: "Playfair Display", "Open Sans condensed", "Calibri Light", Arial;
   color: white;
 }
@@ -8,9 +8,9 @@ body {
   margin: 30px auto 0 auto;
   background: linear-gradient(
       0deg,
-      rgba(0, 0, 0, 0.5385504543614321) 0%,
-      rgba(150, 150, 150, 0.26684177088804273) 39%,
-      rgba(224, 224, 224, 0.06235997817095584) 100%
+      rgba(0, 0, 0, 0.7570378493194152) 0%,
+      rgba(150, 150, 150, 0.3536765047816002) 39%,
+      rgba(224, 224, 224, 0.03995101458552175) 100%
     ),
     url("https://cdn.pixabay.com/photo/2016/03/09/15/18/stars-1246590__340.jpg");
   border-radius: 20px 20px 0px 0px;
@@ -90,7 +90,7 @@ li {
 }
 
 .forecast_bottom {
-  background-color: #2a2f33;
+  background-color: #1d1f20;
   border-radius: 0px 0px 20px 20px;
   box-shadow: 2px 3px 3px rgba(128, 128, 128, 0.301),
     -2px 0px 3px rgba(128, 128, 128, 0.301);
@@ -119,9 +119,10 @@ li {
 }
 #fahrenheit-link {
   font-size: 17px;
+  font-weight: 300px;
   margin-left: -3px;
   padding: -6px;
-  color: pink;
+  color: rgb(207, 196, 255);
   text-decoration: none;
 }
 .weatherToday .active {
@@ -131,4 +132,14 @@ li {
 .weatherToday .active:hover {
   color: pink;
   cursor: pointer;
+}
+
+#osc {
+  color: rgb(217, 241, 252);
+  font-weight: 400px;
+  margin-left: 10px;
+}
+
+.weather-forecast-temp {
+  text-align: center;
 }

@@ -18,6 +18,15 @@ function formatDate(timestamp){
   }
   let time = `${hour}:${minutes}`;
   
+  if (hour >= 6 && hour <=18) {
+    document.getElementById("divmain_id").style.background = `linear-gradient(
+      0deg, 
+      rgba(0,0,0,0.6113795860140931) 0%, 
+      rgba(150,150,150,0.3536765047816002) 39%, 
+      rgba(224,224,224,0.06235997817095584) 100%),
+    url("https://cdn.pixabay.com/photo/2018/08/21/23/29/fog-3622519__340.jpg")`;
+  }
+
   let formattedDate = `${day} ${time}`;
   return formattedDate;
 }
@@ -59,13 +68,13 @@ function displayTemperature(response){
 function formatDay(timestamp) {
   let date = new Date(timestamp);
   let weekDays = [ 
-  "sun",
-  "mon", 
-  "tue", 
-  "wed", 
-  "thu", 
-  "fri", 
-  "sat"
+  "su",
+  "mo", 
+  "tu", 
+  "we", 
+  "th", 
+  "fr", 
+  "sa"
   ];
   let day = weekDays[date.getDay()];
   return day
