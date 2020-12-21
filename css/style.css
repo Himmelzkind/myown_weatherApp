@@ -16,7 +16,7 @@ body {
   border-radius: 20px 20px 0px 0px;
   box-shadow: 2px 0px 3px rgba(128, 128, 128, 0.301),
     -2px 0px 3px rgba(128, 128, 128, 0.301);
-  padding: 20px 30px 20px 30px;
+  padding: 20px 30px 10px 30px;
 }
 
 .btn-primary.mb-2:hover {
